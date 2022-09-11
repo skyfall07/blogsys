@@ -1,5 +1,5 @@
 ---
-title: "Post: Image (Standard)"
+title: "Reset ESX Password with Nutanix"
 categories:
   - Post Formats
 tags:
@@ -7,14 +7,16 @@ tags:
   - Post Formats
 ---
 
-The preferred way of using images is placing them in the `/assets/images/` directory and referencing them with an absolute path. Prepending the filename with `{% raw %}{{ site.url }}{{ site.baseurl }}/assets/images/{% endraw %}` will make sure your images display properly in feeds and such.
+Di you find yourself in the situation where the root account of your ESX is loocked or/and you forgot the password ? And there is no other way than reset the ESXi to retreive access ?`/assets/images/` In the case your cluster of ESX is deployed with Nutanix, here a easy way to reset your password without destroying your ESX`{% raw %}{{ site.url }}{{ site.baseurl }}/assets/images/{% endraw %}` .
 
-Standard image with no width modifier classes applied.
 
-**HTML:**
+
+**Nutanix CVM:**
+
+First connect to one of the CVM of your cluster, and then ssh to the ESX
 
 ```html
-{% raw %}<img src="{{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg" alt="">{% endraw %}
+nutanix@CMV : ~$ ssh root@ESX_IP_ADRESS
 ```
 
 **or Kramdown:**
