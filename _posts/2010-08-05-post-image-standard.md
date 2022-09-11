@@ -7,11 +7,10 @@ tags:
   - Post Formats
 ---
 
-Di you find yourself in the situation where the root account of your ESX is loocked or/and you forgot the password ? And there is no other way than reset the ESXi to retreive access ?`/assets/images/` In the case your cluster of ESX is deployed with Nutanix, here a easy way to reset your password without destroying your ESX`{% raw %}{{ site.url }}{{ site.baseurl }}/assets/images/{% endraw %}` .
+Di you find yourself in the situation where the root account of your ESX is loocked or/and you forgot the password ? And there is no other way than reset the ESXi to retreive access ? In the case your cluster of ESX is deployed with Nutanix, here a easy way to reset your password without destroying your ESX.
 
 
-
-**Nutanix CVM:**
+**Connect to ESX with Nutanix CVM:**
 
 First connect to one of the CVM of your cluster, and then ssh to the ESX
 
@@ -19,28 +18,27 @@ First connect to one of the CVM of your cluster, and then ssh to the ESX
 nutanix@CMV : ~$ ssh root@ESX_IP_ADRESS
 ```
 
-**or Kramdown:**
+Then directly press Enter, no need to enter root password (hopefully for us in that case)
+
+**Chnage root password:**
+
+You normally already log with the root account, so just enter the passwd command :
 
 ```markdown
-{% raw %}![alt]({{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg){% endraw %}
+[root@ESX:~] passwd
 ```
+It will prompt you yo choose a new password.
 
-![Unsplash image 9]({{ site.url }}{{ site.baseurl }}/assets/images/unsplash-image-9.jpg)
+**Account loocked:**
 
-Image that fills page content container by adding the `.full` class with:
-
-**HTML:**
-
-```html
-{% raw %}<img src="{{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg" alt="" class="full">{% endraw %}
-```
-
-**or Kramdown:**
+Probably your account is lookced by too many tries, you will need to reset the number of attempts.
+You can use the command `pam_tally2` with the flag `-reset`
 
 ```markdown
-{% raw %}![alt]({{ site.url }}{{ site.baseurl }}/assets/images/filename.jpg)
-{: .full}{% endraw %}
+[root@ESX:~] pam_tally2 -user root -reset
 ```
 
-![Unsplash image 10]({{ site.url }}{{ site.baseurl }}/assets/images/unsplash-image-10.jpg)
-{: .full}
+**Conclusion:**
+
+For one time you can say thank you to your Nutanix Cluster.
+
